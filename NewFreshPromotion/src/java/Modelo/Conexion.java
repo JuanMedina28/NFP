@@ -12,7 +12,7 @@ public class Conexion {
     public Conexion() {
         url="jdbc:postgresql://localhost:5432/proyecto_refrescos";
         user="postgres";
-        password="s!5m3d46A";
+        password="bd";
     }
     
     public Connection obtenerConnexion(){

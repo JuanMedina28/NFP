@@ -29,7 +29,7 @@
     Se toman los valores para la accion que quiere realizar el usuario y los datos si es que se necesitan.
     Esto es para modificar la cuenta.
     */
-    String accionM="", nombreM="", appM="", correoM="", passwordM="";
+    String accionM="", nombreM="", appM="", correoM="", passwordMN="", passwordMA="";
     if(request.getParameter("accionM")!=null){
         accionM = request.getParameter("accionM");
     }
@@ -42,36 +42,46 @@
     if(request.getParameter("correoM")!=null){
         correoM = request.getParameter("correoM");
     }
-    if(request.getParameter("passwordM")!=null){
-        passwordM = request.getParameter("passwordM");
+    if(request.getParameter("passwordMN")!=null){
+        passwordMN = request.getParameter("passwordMN");
+    }
+    if(request.getParameter("passwordMA")!=null){
+        passwordMA = request.getParameter("passwordMA");
     }
     
     switch(accionM){
         case "Modificar":
                 if(correoM.equals(email)){
-                    usuario.setNombre_usuario(nombreM);
-                    usuario.setApp_usuario(appM);
-                    usuario.setCorreo_usuario(email);
-                    usuario.setPassword_usuario(passwordM);
-                    usuario.setId_usuario(id_usuario);
-                    usuario.updateUsuario();
+                    if(passwordMA.equals(usuario.getPassword_usuario())){
+                        usuario.setNombre_usuario(nombreM);
+                        usuario.setApp_usuario(appM);
+                        usuario.setCorreo_usuario(email);
+                        usuario.setPassword_usuario(passwordMN);
+                        usuario.setId_usuario(id_usuario);
+                        usuario.updateUsuario();
                     
-                    response.sendRedirect("miCuenta.jsp");
+                        response.sendRedirect("miCuenta.jsp");
+                    }else{
+                        out.print("<script>alert('Contraseña incorrecta')</script>");
+                    }
                 }else{
                     usuario.setCorreo_usuario(correoM);
                     if(usuario.validarCorreoRegistro()){
-                        usuario.setNombre_usuario(nombreM);
-                        usuario.setApp_usuario(appM);
-                        usuario.setCorreo_usuario(correoM);
-                        usuario.setPassword_usuario(passwordM);
-                        usuario.setId_usuario(id_usuario);
-                        usuario.updateUsuario();
+                        if(passwordMA.equals(usuario.getPassword_usuario())){
+                            usuario.setNombre_usuario(nombreM);
+                            usuario.setApp_usuario(appM);
+                            usuario.setCorreo_usuario(correoM);
+                            usuario.setPassword_usuario(passwordMN);
+                            usuario.setId_usuario(id_usuario);
+                            usuario.updateUsuario();
                         
-                        HttpSession sesion_act = request.getSession();
-                        sesion_act.setAttribute("email",correoM);
-                        
-                        response.sendRedirect("miCuenta.jsp");
-                
+                            HttpSession sesion_act = request.getSession();
+                            sesion_act.setAttribute("email",correoM);
+                    
+                            response.sendRedirect("miCuenta.jsp");
+                        }else{
+                            out.print("<script>alert('Contraseña incorrecta')</script>");
+                        }
                     }else{
                         out.print("<script>alert('El correo electrónico ya está en uso')</script>");
                     }
@@ -212,9 +222,15 @@
                         </div>
                     </div>
                     <div class="form-group row" style="font-size: 20px;">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
-                        <div class="col-6">
-                            <input type="password" class="form-control" name="passwordM" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" title="Min. 3 caracteres, Max. 15 caracteres. Debe incluir al menos: 1-Mayuscula, 1-Minuscula y 1-Numero">
+                        <label for="inputPassword" class="col-sm-3 col-form-label">Password nueva:</label>
+                        <div class="col-5">
+                            <input type="password" class="form-control" name="passwordMN" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" title="Min. 3 caracteres, Max. 15 caracteres. Debe incluir al menos: 1-Mayuscula, 1-Minuscula y 1-Numero">
+                        </div>
+                    </div>
+                    <div class="form-group row" style="font-size: 20px;">
+                        <label for="inputPassword" class="col-sm-3 col-form-label">Password Actual:</label>
+                        <div class="col-5">
+                            <input type="password" class="form-control" name="passwordMA" required>
                         </div>
                     </div>
                     <div class="form-group row" style="padding-left: 10%; padding-top: 5%; padding-bottom: 5%;">

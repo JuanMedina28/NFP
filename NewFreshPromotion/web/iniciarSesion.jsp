@@ -94,7 +94,7 @@
                     <div class="form-group row" style="font-size: 20px;">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Correo:</label>
                         <div class="col-6">
-                            <input type="email" class="form-control" name="correo" required pattern="[a-zA-Z0-9]+@+(gmail|hotmail)+\.+(com|mx|org)" title="EJ: correo@dominio.terminacion (DOMINIO: gmail | hotmail y TERMINACIÓN: com | mx | org)">
+                            <input type="text" class="form-control" name="correo" required pattern="[a-zA-Z0-9]+@+(gmail|hotmail)+\.+(com|mx|org)" title="EJ: correo@dominio.terminacion (DOMINIO: gmail | hotmail y TERMINACIÓN: com | mx | org)">
                         </div>
                     </div>
                     <div class="form-group row" style="font-size: 20px;">
