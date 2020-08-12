@@ -1,0 +1,9 @@
+// BASE DE DATOS DEL PROYECTO PROMOCION DE REFRESCOS.
+
+create database proyecto_refrescos;
+
+\c proyecto_refrescos;
+
+create table usuario(id_usuario serial primary key, nombre_usuario varchar(20), app_usuario varchar(20), correo_usuario varchar(50) unique, password_usuario varchar(20), tp_usuario varchar(20) default 'Cliente');
+
+create table codigo(codigo varchar(9) primary key, estado_codigo varchar(20) default 'Activo', fecha_lectura varchar(20));
