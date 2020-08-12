@@ -15,6 +15,7 @@
     Usuario usuario = new Usuario(email);
     String nombre_usu = usuario.getNombre_usuario();
     String app_usu = usuario.getApp_usuario();
+    String tp_usu = usuario.getTp_usuario();
     int id_usu = usuario.getId_usuario();
     
     /*
@@ -75,7 +76,34 @@
         <!-- // BARRA DE NAVEGACION -->
 
         <!-- CONTENIDO ACCIONES -->
+        <%
+            if(tp_usu.equals("Administrador")){
+        %>        
+        <div class="row1 bg-warning" style="display: flex; padding-top: 5%; padding-bottom: 5%; min-height: 500px;">
+            <div class="col-4">
 
+            </div>
+            <div class="col-4">
+                <p>
+                    <a class="btn btn-dark" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample" style="font-size: 20px; width: 100%;">
+                        Códigos
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse1">
+                    <div class="card card-body">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <form action="codigos.jsp" method="POST">
+                                <input type="submit" class="btn btn-info" name="accionCodigos" value="Consultar codigos" disabled data-toggle="tooltip" data-placement="right" title="Disponible proximamente">
+                                <input type="submit" class="btn btn-success" name="accionCodigos" value="Subir codigos" data-toggle="tooltip" data-placement="right">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <%
+            }else{
+        %> 
         <div class="row1 bg-warning" style="display: flex; padding-top: 5%; padding-bottom: 5%; min-height: 500px;">
             <div class="col-4">
 
@@ -126,6 +154,9 @@
                 </div>
             </div>
         </div>
+        <%
+            }
+        %>
         <!-- // CONTENIDO ACCIONES -->
 
         <!-- FOOTER REDES -->
